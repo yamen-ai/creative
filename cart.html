@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    /* Add your CSS styling here */
+    body {
+      background-color: #f7f7f7;
+    }
+    .cart-item {
+      background-color: #ffffff;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .cart-header {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    .btn-remove {
+      color: #ff0000;
+      cursor: pointer;
+    }
+    .btn-checkout {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="cart-header">
+    <h2>Your Shopping Cart</h2>
+  </div>
+  <div id="cartItems"></div>
+  <button class="btn-checkout" onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+  // Sample product data
+  var products = [
+    { id: 1, name: 'Laptop 1', price: 1000, quantity: 1 },
+    // Add more products as needed
+  ];
+
+  // Function to display cart items
+  function displayCartItems() {
+    var cartItems = document.getElementById('cartItems');
+    cartItems.innerHTML = '';
+    products.forEach(function(product) {
+      cartItems.innerHTML +=
+        '<div class="cart-item">' +
+        '<h4>' + product.name + '</h4>' +
+        '<p>Price: $' + product.price + '</p>' +
+        '<p>Quantity: <input type="number" value="' + product.quantity + '" min="1" onchange="updateQuantity(' + product.id + ', this.value)"></p>' +
+        '<span class="btn-remove" onclick="removeFromCart(' + product.id + ')">Remove</span>' +
+        '</div>';
+    });
+  }
+
+  // Function to update quantity
+  function updateQuantity(productId, quantity) {
+    var product = products.find(p => p.id === productId);
+    if (product) {
+      product.quantity = quantity;
+      displayCartItems();
+    }
+  }
+
+  // Function to remove item from cart
+  function removeFromCart(productId) {
+    products = products.filter(p => p.id !== productId);
+    displayCartItems();
+  }
+
+  // Function to proceed to checkout
+  function checkout() {
+    // Implement checkout functionality here
+    alert('Proceeding to checkout...');
+  }
+
+  // Initial display of cart items
+  displayCartItems();
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
